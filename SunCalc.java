@@ -13,8 +13,10 @@ public class SunCalc{
     public static float sunMap[][] = null;
         
     public static void main(String[] args){
-            String filename = "sample_input.txt";
-           //String filename = "test.txt";
+    
+            String fileNameIn = args[0];
+            String fileNameOut = args[1];
+
             String[] sunValues;
             int numTrees=1;
             Tree[] trees = null;
@@ -23,7 +25,7 @@ public class SunCalc{
             
             try{
                 //access text file
-                BufferedReader bf = new BufferedReader(new FileReader(filename));
+                BufferedReader bf = new BufferedReader(new FileReader(fileNameIn));
                 
                 //get sunmap info
                 String[] sizeOfGrid = bf.readLine().split(" ");
@@ -61,23 +63,23 @@ public class SunCalc{
                 System.out.println(e);
             }
             
+            //write values to textfile
             try{
-                FileWriter fw = new FileWriter("outputTest.txt");
+                FileWriter fw = new FileWriter(fileNameOut);
                 BufferedWriter bfw = new BufferedWriter(fw);
-            
+     
                 float sumOfSunlightOnTrees = sum(trees);
-                //System.out.println(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
-                //System.out.println(numTrees);
-            
+           
                 bfw.write(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
                 bfw.newLine();
                 bfw.write(numTrees+"");
             
                 for(int i =0; i<numTrees; i++){
                     bfw.newLine();
-                    //System.out.println(String.format("%.6f",trees[i].sunLight));
                     bfw.write(String.format("%.6f",trees[i].sunLight));
                 }
+                
+                bfw.close();
             }
             catch(Exception e){
                 System.out.println(e);
