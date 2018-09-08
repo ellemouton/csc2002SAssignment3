@@ -61,12 +61,26 @@ public class SunCalc{
                 System.out.println(e);
             }
             
-            float sumOfSunlightOnTrees = sum(trees);
-            System.out.println(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
-            System.out.println(numTrees);
+            try{
+                FileWriter fw = new FileWriter("outputTest.txt");
+                BufferedWriter bfw = new BufferedWriter(fw);
             
-            for(int i =0; i<numTrees; i++){
-                System.out.println(String.format("%.6f",trees[i].sunLight));
+                float sumOfSunlightOnTrees = sum(trees);
+                //System.out.println(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
+                //System.out.println(numTrees);
+            
+                bfw.write(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
+                bfw.newLine();
+                bfw.write(numTrees+"");
+            
+                for(int i =0; i<numTrees; i++){
+                    bfw.newLine();
+                    //System.out.println(String.format("%.6f",trees[i].sunLight));
+                    bfw.write(String.format("%.6f",trees[i].sunLight));
+                }
+            }
+            catch(Exception e){
+                System.out.println(e);
             }
             
     }//end main
