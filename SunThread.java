@@ -29,7 +29,7 @@ public class SunThread extends RecursiveTask<Float>{
                 int yStart = t.yCorner;
                 int xSize = t.size;
                 int ySize = t.size;
-                int sunlight = 0;
+                float sunlight = 0;
                 
                 if(sunMapXlimit-(xStart+xSize)<0){
                     xSize = sunMapXlimit-xStart;
@@ -40,11 +40,12 @@ public class SunThread extends RecursiveTask<Float>{
                 
                 for(int x = xStart; x<xStart+xSize; x++){
                     for(int y = yStart; y<yStart+ySize; y++){
-                        ans+=SunCalc.sunMap[x][y];
+                        sunlight+=SunCalc.sunMap[x][y];
+                        //ans+=SunCalc.sunMap[x][y];
                     }
                 }
-                //ans+=sunlight;
-                //t.sunLight = sunlight;
+                ans+=sunlight;
+                t.sunLight = sunlight;
                           
             }
             return ans;

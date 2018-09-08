@@ -51,7 +51,7 @@ public class SunCalc{
                     int xStart = Integer.parseInt(treeInfo[0]);
                     int yStart = Integer.parseInt(treeInfo[1]);
                     int size = Integer.parseInt(treeInfo[2]);
-                    trees[i] = new Tree(xStart,yStart,size);
+                    trees[i] = new Tree(xStart,yStart,size,0);
                 }
                 
                 bf.close();
@@ -62,8 +62,12 @@ public class SunCalc{
             }
             
             float sumOfSunlightOnTrees = sum(trees);
-            System.out.println(sumOfSunlightOnTrees/numTrees);
+            System.out.println(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
+            System.out.println(numTrees);
             
+            for(int i =0; i<numTrees; i++){
+                System.out.println(String.format("%.6f",trees[i].sunLight));
+            }
             
     }//end main
 
