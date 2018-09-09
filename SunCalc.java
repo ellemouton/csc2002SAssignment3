@@ -6,11 +6,19 @@ import java.io.*;
 public class SunCalc{
     
     static final ForkJoinPool fjPool = new ForkJoinPool();
+    public static float sunMap[][] = null;
+    static long startTime = 0;
+    
+    private static void tick(){
+        startTime = System.currentTimeMillis();    
+    }
+    private static float tock(){
+        return (System.currentTimeMillis()-startTime)/1000.0f;
+    }
     
     static float sum(Tree[] arr){
         return fjPool.invoke(new SunThread(arr,0,arr.length));
     }
-    public static float sunMap[][] = null;
         
     public static void main(String[] args){
     
@@ -68,7 +76,13 @@ public class SunCalc{
                 FileWriter fw = new FileWriter(fileNameOut);
                 BufferedWriter bfw = new BufferedWriter(fw);
      
+                System.gc();
+                
+                tick();
                 float sumOfSunlightOnTrees = sum(trees);
+                System.out.println(tock());
+           
+                System.gc();
            
                 bfw.write(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
                 bfw.newLine();

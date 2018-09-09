@@ -4,7 +4,7 @@ public class SunThread extends RecursiveTask<Float>{
     int low;
     int high;
     Tree[] treeArray;
-    static final int SEQUENTIAL_CUTOFF = 500;
+    static final int SEQUENTIAL_CUTOFF = 10000;
     
     int ans = 0;
     
@@ -53,7 +53,6 @@ public class SunThread extends RecursiveTask<Float>{
         else{
             SunThread left = new SunThread(treeArray, low, (high+low)/2);
             SunThread right = new SunThread(treeArray, (high+low)/2, high);
-            
             left.fork();
             float rightAns = right.compute();
             float leftAns = left.join();
