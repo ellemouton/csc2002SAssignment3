@@ -44,7 +44,7 @@ public class SunCalc{
                 //get tree info
                 numTrees = Integer.parseInt(bf.readLine());
                 trees = new Tree[numTrees];
-                
+
                 //populate sunmap array
                 int counter = 0;
                 

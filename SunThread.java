@@ -4,7 +4,7 @@ public class SunThread extends RecursiveTask<Float>{
     int low;
     int high;
     Tree[] treeArray;
-    static final int SEQUENTIAL_CUTOFF = 10000;
+    static final int SEQUENTIAL_CUTOFF = 2000;
     
     int ans = 0;
     
@@ -16,7 +16,7 @@ public class SunThread extends RecursiveTask<Float>{
     
     protected Float compute(){
         if((high-low)<SEQUENTIAL_CUTOFF){
-            
+            System.out.println("im a new thread");
             float ans = 0;
             
             int sunMapXlimit = SunCalc.sunMap.length;
