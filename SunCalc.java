@@ -29,7 +29,7 @@ public class SunCalc{
             int numTrees=1;
             Tree[] trees = null;
             
-            //getting the data from tet file
+            //getting the data from text file
             
             try{
                 //access text file
@@ -83,7 +83,7 @@ public class SunCalc{
                 System.out.println(tock());
            
                 System.gc();
-           
+                
                 bfw.write(String.format("%.6f",sumOfSunlightOnTrees/numTrees));
                 bfw.newLine();
                 bfw.write(numTrees+"");

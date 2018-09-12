@@ -4,7 +4,7 @@ public class SunThread extends RecursiveTask<Float>{
     int low;
     int high;
     Tree[] treeArray;
-    static final int SEQUENTIAL_CUTOFF = 2000;
+    static final int SEQUENTIAL_CUTOFF = 4000000;
     
     int ans = 0;
     
