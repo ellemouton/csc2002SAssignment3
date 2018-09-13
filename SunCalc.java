@@ -37,9 +37,9 @@ public class SunCalc{
                 
                 //get sunmap info
                 String[] sizeOfGrid = bf.readLine().split(" ");
-                int sizeX = Integer.parseInt(sizeOfGrid[0]);
-                int sizeY = Integer.parseInt(sizeOfGrid[1]);
-                sunMap = new float[sizeX][sizeY];
+                int sizeY = Integer.parseInt(sizeOfGrid[0]);
+                int sizeX = Integer.parseInt(sizeOfGrid[1]);
+                sunMap = new float[sizeY][sizeX];
                 sunValues = bf.readLine().split(" ");
                 //get tree info
                 numTrees = Integer.parseInt(bf.readLine());
@@ -48,9 +48,9 @@ public class SunCalc{
                 //populate sunmap array
                 int counter = 0;
                 
-                for(int x = 0; x<sizeX;x++){
-                    for(int y = 0; y<sizeY; y++){
-                        sunMap[x][y]=Float.parseFloat(sunValues[counter]);
+                for(int y = 0; y<sizeY;y++){
+                    for(int x = 0; x<sizeX; x++){
+                        sunMap[y][x]=Float.parseFloat(sunValues[counter]);
                         counter++;
                     }
                 }
@@ -58,11 +58,12 @@ public class SunCalc{
                 //populate Tree array
                 for(int i =0; i<numTrees; i++){
                     String[] treeInfo = bf.readLine().split(" ");
-                    int xStart = Integer.parseInt(treeInfo[0]);
-                    int yStart = Integer.parseInt(treeInfo[1]);
+                    int yStart = Integer.parseInt(treeInfo[0]);
+                    int xStart = Integer.parseInt(treeInfo[1]);
                     int size = Integer.parseInt(treeInfo[2]);
-                    trees[i] = new Tree(xStart,yStart,size,0);
+                    trees[i] = new Tree(yStart,xStart,size,0);
                 }
+                System.out.println(numTrees);
                 
                 bf.close();
                 
@@ -100,5 +101,4 @@ public class SunCalc{
             }
             
     }//end main
-
-}//end class
+}

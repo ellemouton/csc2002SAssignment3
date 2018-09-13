@@ -4,23 +4,23 @@ public class SunThread extends RecursiveTask<Float>{
     int low;
     int high;
     Tree[] treeArray;
-    static final int SEQUENTIAL_CUTOFF = 4000000;
+
+    static final int SEQUENTIAL_CUTOFF = 100000;
     
-    int ans = 0;
-    
-    SunThread(Tree[] t, int l, int h){
+    SunThread(Tree[] tree, int l, int h){
         low = l;
         high = h;
-        treeArray = t;
+        treeArray = tree;
     }
     
     protected Float compute(){
         if((high-low)<SEQUENTIAL_CUTOFF){
             System.out.println("im a new thread");
+
             float ans = 0;
             
-            int sunMapXlimit = SunCalc.sunMap.length;
-            int sunMapYlimit = SunCalc.sunMap[0].length;
+            int sunMapYlimit = SunCalc.sunMap.length;
+            int sunMapXlimit = SunCalc.sunMap[0].length;
                       
             
             for(int i=low;i<high;i++){
@@ -29,7 +29,7 @@ public class SunThread extends RecursiveTask<Float>{
                 int yStart = t.yCorner;
                 int xSize = t.size;
                 int ySize = t.size;
-                float sunlight = 0;
+                float sun = 0;
                 
                 if(sunMapXlimit-(xStart+xSize)<0){
                     xSize = sunMapXlimit-xStart;
@@ -38,14 +38,15 @@ public class SunThread extends RecursiveTask<Float>{
                     ySize = sunMapYlimit-yStart;
                 }
                 
-                for(int x = xStart; x<xStart+xSize; x++){
-                    for(int y = yStart; y<yStart+ySize; y++){
-                        sunlight+=SunCalc.sunMap[x][y];
-                        //ans+=SunCalc.sunMap[x][y];
+                for(int y = yStart; y<yStart+ySize; y++){
+                    for(int x = xStart; x<xStart+xSize; x++){
+
+                        sun += SunCalc.sunMap[y][x];
+
                     }
                 }
-                ans+=sunlight;
-                t.sunLight = sunlight;
+                t.sunLight = sun;
+                ans+=sun;
                           
             }
             return ans;

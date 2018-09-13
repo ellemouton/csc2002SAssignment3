@@ -6,7 +6,7 @@ public class Tree{
     int size;
     float sunLight;
     
-    public Tree(int x, int y, int size, float sun){
+    public Tree(int y, int x, int size, float sun){
         xCorner = x;
         yCorner = y;
         this.size = size;
