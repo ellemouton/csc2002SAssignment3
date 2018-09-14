@@ -1,11 +1,11 @@
 import java.util.concurrent.RecursiveTask;
 
-public class SunThread extends RecursiveTask<Float>{
+public class SunThread extends RecursiveTask<Double>{
     int low;
     int high;
     Tree[] treeArray;
 
-    static final int SEQUENTIAL_CUTOFF = 100000;
+    static final int SEQUENTIAL_CUTOFF = 5000;
     
     SunThread(Tree[] tree, int l, int h){
         low = l;
@@ -13,11 +13,11 @@ public class SunThread extends RecursiveTask<Float>{
         treeArray = tree;
     }
     
-    protected Float compute(){
+    protected Double compute(){
         if((high-low)<SEQUENTIAL_CUTOFF){
             System.out.println("im a new thread");
 
-            float ans = 0;
+            double ans = 0;
             
             int sunMapYlimit = SunCalc.sunMap.length;
             int sunMapXlimit = SunCalc.sunMap[0].length;
@@ -29,7 +29,7 @@ public class SunThread extends RecursiveTask<Float>{
                 int yStart = t.yCorner;
                 int xSize = t.size;
                 int ySize = t.size;
-                float sun = 0;
+                double sun = 0;
                 
                 if(sunMapXlimit-(xStart+xSize)<0){
                     xSize = sunMapXlimit-xStart;
@@ -55,8 +55,8 @@ public class SunThread extends RecursiveTask<Float>{
             SunThread left = new SunThread(treeArray, low, (high+low)/2);
             SunThread right = new SunThread(treeArray, (high+low)/2, high);
             left.fork();
-            float rightAns = right.compute();
-            float leftAns = left.join();
+            double rightAns = right.compute();
+            double leftAns = left.join();
             return leftAns+rightAns; 
         }
     

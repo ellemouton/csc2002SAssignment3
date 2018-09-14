@@ -4,9 +4,9 @@ public class Tree{
     int xCorner;
     int yCorner;
     int size;
-    float sunLight;
+    double sunLight;
     
-    public Tree(int y, int x, int size, float sun){
+    public Tree(int y, int x, int size, double sun){
         xCorner = x;
         yCorner = y;
         this.size = size;

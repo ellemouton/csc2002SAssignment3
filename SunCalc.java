@@ -6,7 +6,7 @@ import java.io.*;
 public class SunCalc{
     
     static final ForkJoinPool fjPool = new ForkJoinPool();
-    public static float sunMap[][] = null;
+    public static double sunMap[][] = null;
     static long startTime = 0;
     
     private static void tick(){
@@ -16,7 +16,7 @@ public class SunCalc{
         return (System.currentTimeMillis()-startTime)/1000.0f;
     }
     
-    static float sum(Tree[] arr){
+    static double sum(Tree[] arr){
         return fjPool.invoke(new SunThread(arr,0,arr.length));
     }
         
@@ -39,8 +39,9 @@ public class SunCalc{
                 String[] sizeOfGrid = bf.readLine().split(" ");
                 int sizeY = Integer.parseInt(sizeOfGrid[0]);
                 int sizeX = Integer.parseInt(sizeOfGrid[1]);
-                sunMap = new float[sizeY][sizeX];
+                sunMap = new double[sizeY][sizeX];
                 sunValues = bf.readLine().split(" ");
+
                 //get tree info
                 numTrees = Integer.parseInt(bf.readLine());
                 trees = new Tree[numTrees];
@@ -50,7 +51,7 @@ public class SunCalc{
                 
                 for(int y = 0; y<sizeY;y++){
                     for(int x = 0; x<sizeX; x++){
-                        sunMap[y][x]=Float.parseFloat(sunValues[counter]);
+                        sunMap[y][x]=Double.parseDouble(sunValues[counter]);
                         counter++;
                     }
                 }
@@ -63,7 +64,6 @@ public class SunCalc{
                     int size = Integer.parseInt(treeInfo[2]);
                     trees[i] = new Tree(yStart,xStart,size,0);
                 }
-                System.out.println(numTrees);
                 
                 bf.close();
                 
@@ -80,7 +80,7 @@ public class SunCalc{
                 System.gc();
                 
                 tick();
-                float sumOfSunlightOnTrees = sum(trees);
+                double sumOfSunlightOnTrees = sum(trees);
                 System.out.println(tock());
            
                 System.gc();
